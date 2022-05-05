@@ -1,0 +1,57 @@
+body { min-height: 100vh; }
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('/images/undraw_aircraft_fbvl.svg') no-repeat;
+    background-size: cover;
+
+}
+// .parent {
+//   display: flexbox;
+//   grid-template-columns: repeat(5, 1fr);
+//   grid-template-rows: repeat(5, 1fr);
+//   grid-column-gap: 0px;
+//   grid-row-gap: 0px;
+//   }
+  
+//   .div1 { grid-area: 1 / 1 / 2 / 6; }
+//   .div2 { grid-area: 2 / 2 / 5 / 5; }
+//   .div3 { grid-area: 5 / 1 / 6 / 6; }
+
+  
+  h1{
+      font-family: 'Square Peg', cursive;
+      font-weight: 400;
+      text-align: center;
+      margin: 1em;
+    }
+
+
+  .formclass {  
+      font-family: 'Handlee', cursive;
+      text-align: center;
+      margin: 5% 0;
+  }
+  .title{
+      font-family: 'Architects Daughter', cursive;
+      text-align: center;
+  }
+  #entryHolder{
+      font-family: 'Handlee', cursive;
+      text-align: center;   
+  }
+  #footer {
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* Height of the footer*/ 
+    height: 40px;
+    background: whitesmoke;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="">
+    <script type="module" src="/client/js/app.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="/client/styles/base.scss"/>
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Square+Peg&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Handlee&family=Square+Peg&display=swap" rel="stylesheet">
+    <title>Travel App</title>
+  </head>
+  <body> 
+    <div class="parent">
+        <h1>Ovci Travel - We make your dreams come true!</h1>
+      <div class="formDiv">
+        <form class="formclass">
+            <div class="holder_country_city">
+              <label for="country">Where would you like to go?</label>
+              <input type="text" id="countryInput" placeholder="Enter destination Country here"/>
+              <br>
+              <label for="city">Where would you like to go?</label>
+              <input type="text" id="cityInput"  placeholder="Enter destination city here"/>
+              <br>
+            <!-- </div> -->
+            <!-- <div class="holder_DATES"> -->
+              <label for="dates">When would you like to go?</label>
+              <input type="text" name="daterange" id="fecha" value="01/01/2022 - 01/01/2024"/>
+              <script>
+              $(function() {
+                $('input[name="daterange"]').daterangepicker({
+                  opens: 'left'
+                }, function(start, end, label) {
+                  console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                });
+              });
+              </script>
+            </div>
+          <input type="submit" id="button" name="" value="Let's Go!">
+        </form>
+        <div class="holderentry">
+          <div class="title">Most recent data about your destination:</div>
+            <div id="entryHolder">
+              <div id="temp">Current Temperature:</div>
+              <div id="maxtemp">Forecast Max Temperature:</div>
+              <div id="mintemp">Forecast Min Temperature:</div>
+              <div id="precip">Forecast Precipitations - Rain:</div>
+            </div>
+            <div class="holder_image">
+              <div id="imagen"></div>
+            </div>
+          </div>
+        </div>
+    <footer id="footer">Thanks for using our Travel App. Orne Virardi </footer>
+  </body>
+</html>
