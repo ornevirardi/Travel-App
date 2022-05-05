@@ -16,7 +16,7 @@ function performAction (e){
     const country = document.getElementById("countryInput").value
     const city = document.getElementById("cityInput").value
     const dates = document.getElementById("fecha").value
-    getApiData('/apiData', {
+    getApiData('http://localhost:7654/allData', {
         Country: country,
         City: city,
         Dates: dates,
