@@ -1,6 +1,6 @@
 //Make the POST request with a helper function: taken from my project: evaluate news NLP: https://github.com/ornevirardi/NLP-testing/blob/main/src/client/js/formHandler.js
 
-async function getApiData(url, data = {}) {
+async function getApiData(url = '', data = {}) {
     const response = await fetch(url, {
       method: "POST",
       credentials: "same-origin",
@@ -23,7 +23,7 @@ async function getApiData(url, data = {}) {
 
 //UpdateUI taken from my project: evaluate news NLP https://github.com/ornevirardi/NLP-testing/blob/main/src/client/js/formHandler.js
   async function updateUI() {
-    const request = await fetch('http://localhost:7654/allData'); 
+    const request = await fetch('http://localhost:1111/allData'); 
     try {
         const allData = await request.json();
         console.log(allData);
