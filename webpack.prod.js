@@ -9,9 +9,6 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
     entry: './src/client/index.js',
     mode: 'production',
-    devServer: {
-        port: 3000,
-        },
     output: {
         libraryTarget: 'var',
         library: 'Client',
@@ -27,24 +24,15 @@ module.exports = {
                 {
                     test: /\.scss$/,
                     use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-                },
-                {
-                    test: /\.(png|jpg)$/,
-                    loader: 'url-loader',
-                    options: {
-                      name: '[path][name].[ext]',
-            
-            
-                    },
-               },
+                }
             ]
         },
         plugins: [
             new HtmlWebPackPlugin({
-                template: "./src/client/views/index.html",
+                template: "./src/client/view/index.html",
                 filename: "./index.html",
             }),
-            new MiniCssExtractPlugin({filename: "[name].css"}),
+            new MiniCssExtractPlugin({filename: "[name].css"})
         ],
         optimization: {
             minimizer: [
