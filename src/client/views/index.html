@@ -2,13 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="">
-    <script type="module" src="/client/js/app.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
-    <link rel="stylesheet" type="text/css" href="/client/styles/base.scss"/>
+    <link rel="shortcut icon" href="#">
+    <!-- <link rel="stylesheet" type="text/css" href="/client/styles/base.scss"/> -->
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,18 +26,14 @@
               <input type="text" id="cityInput"  placeholder="Enter destination city here"/>
               <br>
             <!-- </div> -->
-            <!-- <div class="holder_DATES"> -->
-              <label for="dates">When would you like to go?</label>
-              <input type="text" name="daterange" id="fecha" value="01/01/2022 - 01/01/2024"/>
-              <script>
-              $(function() {
-                $('input[name="daterange"]').daterangepicker({
-                  opens: 'left'
-                }, function(start, end, label) {
-                  console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                });
-              });
-              </script>
+            <div class="holder_startDate">
+              <label for="startDate">When would you like to go?</label>
+              <input id="startDate" placeholder="MM/DD/YYYY"></input>
+            </div>
+            <div class="holder_endDate">
+              <label for="endDate">When would you like to go back?</label>
+              <input id="endDate" placeholder="MM/DD/YYYY"></input>
+
             </div>
           <input type="submit" id="button" name="" value="Let's Go!">
         </form>
