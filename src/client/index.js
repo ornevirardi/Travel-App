@@ -10,7 +10,7 @@ export {updateUI}
 
 //Event listener to get things done taken from my project Weather Journal App: https://github.com/ornevirardi/weather_journal_app/blob/main/website/app.js
 
-document.getElementById('button').addEventListener('button', performAction);
+document.getElementById('button').addEventListener('click', performAction);
 
 function performAction (e){
     const country = document.getElementById("countryInput").value
