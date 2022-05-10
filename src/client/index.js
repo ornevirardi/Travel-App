@@ -14,12 +14,18 @@ document.getElementById('button').addEventListener('click', performAction);
 
 function performAction (e){
     const country = document.getElementById("countryInput").value
+    console.log(country);
     const city = document.getElementById("cityInput").value
-    const dates = document.getElementById("fecha").value
-    getApiData('http://localhost:7654/allData', {
+    console.log(city);
+    const startDate = document.getElementById('startDate').value;
+    console.log(startDate);
+    const endDate = document.getElementById('endDate').value;
+    console.log(endDate);
+    getApiData('http://localhost:1111/allData', {
         Country: country,
         City: city,
-        Dates: dates,
+        Start: startDate,
+        End: endDate,
     })
     .then (()=>{updateUI();});
 };
