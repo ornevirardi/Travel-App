@@ -1,28 +1,42 @@
 // Setup empty JS object to act as endpoint for all routes
-let projectData = {};
-
-const express = require ('express');
+projectData = {};
+// Require Express to run server and routes
+const express = require("express");
+// Start up an instance of app
 const app = express();
+/*Dependencies*/
+
 const bodyParser = require("body-parser");
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// Cors for cross origin allowance
 const cors = require("cors");
-const { response } = require('express');
-app.use(cors({origin: '*'}));
-app.use(express.static('dist'));
-const axios = require('axios');
+app.use(cors());
+//Node-fetch not working, used: https://stackoverflow.com/questions/69055506/how-to-fix-must-use-import-to-load-es-module-discord-js
+const fetch = (...args) =>
+    import ('node-fetch').then(({ default: fetch }) => fetch(...args));
+// Initialize the main project folder
+app.use(express.static("dist"));
 
 
-app.listen(7654, ()=>{
-    console.log('Yay your app is running in port 7654')
-})
+// Setup Server
+const port = 1111;
+const server = app.listen(port, listening);
+
+function listening() {
+  console.log("Yay! The server is running!");
+  console.log(`Running on localhost: ${port}`);
+}
+
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-  });
+  }); 
   
 //Global Variables
-const username = "ornemoon";
+const api_key_one = "ornemoon";
 const api_key_two = "b1f33692e9d44e2787bc3410957ac1ee";
 const api_key_three = "26085637-82271d523132340b46a70b7f0";
 
@@ -30,78 +44,98 @@ const api_key_three = "26085637-82271d523132340b46a70b7f0";
 app.post('/allData', getApiData);
 
 async function getApiData(req, res){
-let country = req.body.countryInput
-let city = req.body.cityInput
-let dates = req.body.fecha
+    let country = req.body.countryInput
+    let city = req.body.cityInput
+    let startDate = new Date(req.body.Start);
+    let endDate = new Date(req.body.End);
 
-//geoData - Code taken from answer in Knowledge: https://knowledge.udacity.com/questions/248560
-let geoData ={};
+    //Date function taken from project Weather Journal App https://github.com/ornevirardi/weather_journal_app/blob/main/website/app.js , Get today's date: https://www.codegrepper.com/code-examples/javascript/how+to+get+today+date+in+javascript and https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+    let tripDates = endDate.getTime() - startDate.getTime();
+    let tripDuration = `Your trip is ${tripDates/ (1000 * 60 * 60 *24)} days`;
 
-const getDataFromGeoNames= async (username,city)=>{
-    const url=`http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=${username}`;
-    try{
-        return await axios.get(url)
-                .then(res=>{
-                    return {
-                        lat:res.data.geonames[0].lat,
-                        lng:res.data.geonames[0].lng
-                    }
-                });
-    } catch(error){
-        console.log(error, "There has been an error");
+    let today = new Date();  
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    let yyyy = today.getFullYear();
+    today = new Date(mm + '/' + dd + '/' + yyyy); 
+    console.log(today);
+    console.log(startDate);
+    let timeDiff = startDate.getTime() - today.getTime();
+    console.log(timeDiff)
+    let daysDiff = `${timeDiff / (1000 * 60 * 60 *24)} days`;
+    console.log(daysDiff);
+
+    //geoData - 
+    let geoData ={};
+    const getGeoData = async(key) => {
+        const geo_response = await fetch((`http://api.geonames.org/searchJSON?q=${city}&maxRows=10&username=${api_key_one}`), { method: 'GET' })
+        try {
+            const geo_data_json = await geo_response.json();
+            console.log(geo_data_json);
+            geoData = {
+                lng: geo_data_json.geonames[0].lng,
+                lat: geo_data_json.geonames[0].lat,
+            }
+            console.log(geoData);
+        } catch (error) {
+            console.log("There has been an error fetching GeoData information ", error);
+        }
     }
-    geoData ={
-        lat:res.data.geonames[0].lat,
-        lng:res.data.geonames[0].lng
+    await getGeoData(city);
+
+     `http://api.weatherbit.io/v2.0/forecast/daily?lat=${geoData.lat}&lon=${geoData.lng}&key=${api_key_two}&units=M`
+
+    //WeatherBit
+    let weatherData ={};
+    const getWeatherData = async() => {
+        const weather_response = await fetch(`http://api.weatherbit.io/v2.0/forecast/daily?lat=${geoData.lat}&lon=${geoData.lng}&key=${api_key_two}&units=M`)
+        try {
+            const weather_data_json = await weather_response.json();
+            console.log(weather_data_json);
+            weatherData ={
+                temp: weather_data_json.data[0].temp,
+                weather: weather_data_json.data[0].weather.description,
+                maxTemp: weather_data_json.data[0].weather.max_temp,
+                minTemp: weather_data_json.data[0].weather.min_temp ,
+                precip: weather_data_json.data[0].weather.precip,
+            }}catch (error) {
+            console.log("There has been an error fetching WeatherBit information ", error);
+        }}
+        await getWeatherData();
+
+    //Pixabay
+
+    let foto ={}
+    const getPictureData = async()=>{ 
+        const pix_response = await fetch (`https://pixabay.com/api/?key=${api_key_three}&q=${city}&image_type=photo&pretty=true`);
+        try {
+            const pix_data = await pix_response.json();
+            console.log(pix_data);
+            pic_pic = await fetch(pix_data.hits[4].webformatURL);
+            foto = {
+                fotoCity: pic_pic,
+            }}catch (error) {
+                console.log("There has been an error fetching WeatherBit information ", error);
+            }}
+            // document.getElementById('imagen').setAttribute('src', pic_pic );
+    await getPictureData();
+    //Gather all info in proectData obj
+    projectData ={
+        daysDiff: daysDiff,
+        tripDuration: tripDuration,
+        temp: weatherData.temp,
+        maxTemp: weatherData.maxTemp,
+        minTemp: weatherData.minTemp,
+        precip: weatherData.precip,
+        pais: country,
+        ciudad: city,
+        foto: foto.fotoCity
     }
-}
-//WeatherBit
-let weatherData ={};
-const weather_response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${geoData.lat}&lon=${geoData.lng}&key=${api_key_two}`)
-const weather_data = await weather_response.json();
-console.log(weather_data);
-const weather_temp = await fetch(weather_data.temp);
-console.log(weather_temp);
-const weather_maxtemp = await fetch(weather_data.max_temp);
-console.log(weather_maxtemp);
-const weather_mintemp = await fetch(weather_data.min_temp);
-console.log(weather_mintemp);
-const weather_rain = await fetch(weather_data.precip);
-console.log(weather_rain);
-weatherData ={
-    temp: weather_temp,
-    maxTemp: weather_maxtemp,
-    minTemp: weather_mintemp,
-    precip: weather_rain,
-}
-
-//Pixabay
-
-let foto ={}
-const pix_response = await fetch (`https://pixabay.com/api/?key=${api_key_three}&q=${city}&image_type=photo&pretty=true`);
-  const pix_data = await pix_response.json();
-  console.log(pix_data);
-  pic_pic = await fetch(pix_data.hits[4].webformatURL);
-  foto = {
-      fotoCity: pic_pic,
-  }
-  document.getElementById('imagen').setAttribute('src', pic_pic );
-
-//Gather all info in proectData obj
-projectData ={
-    temp: weatherData.temp,
-    maxTemp: weatherData.maxTemp,
-    minTemp: weatherData.minTemp,
-    precip: weatherData.precip,
-    pais: country,
-    ciudad: city,
-    foto: foto.fotoCity
-}
-res.send(projectData)
-console.log(`After fetching the data: ${projectData}`);
+    res.send(projectData)
+    console.log(`After fetching the data: ${projectData}`);
 };
 
-app.get('/allData', (request, respose)=>{
+app.get('/allData', (request, response)=>{
     response.send(projectData);
 })
 
