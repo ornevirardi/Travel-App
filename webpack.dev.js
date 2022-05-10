@@ -8,12 +8,18 @@ module.exports = {
     output: {
         libraryTarget: 'var',
         library: 'Client',
+        clean: true,
+        path: path.join(__dirname, 'dist'),
+        filename: 'main.js',
+        publicPath: '/'
     },
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
     devServer: {
-        port: 3000
+        compress: true,
+        // port: 1603,
+        historyApiFallback: true,
       },
     module: {
         rules: [
@@ -25,22 +31,12 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader' ]
-            },
-            {
-                test: /\.(png|jpg)$/,
-                use: {
-                loader: 'url-loader',
-                options: {
-                  limit: 8000,
-                  name: '[path][name].[ext]',
-              },
-            },
-        },
+            }
         ]
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
+            template: "./src/client/view/index.html",
             filename: "./index.html",
         }),
         new CleanWebpackPlugin({
@@ -52,6 +48,7 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        // new WorkboxPlugin.GenerateSW()
     ],
     optimization:{
         minimize: true,
