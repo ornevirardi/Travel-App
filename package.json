@@ -2,9 +2,9 @@
   "name": "capstone_project_travel_app",
   "version": "1.0.0",
   "description": "Capstone project for the Front End Web Development Nanodegree Program",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node src/server/server.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
