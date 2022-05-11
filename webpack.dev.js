@@ -18,7 +18,7 @@ module.exports = {
     stats: 'verbose',
     devServer: {
         compress: true,
-        // port: 1603,
+        port: 3000,
         historyApiFallback: true,
       },
     module: {
@@ -36,7 +36,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./src/client/view/index.html",
+            template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
         new CleanWebpackPlugin({
