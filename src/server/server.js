@@ -94,10 +94,10 @@ async function getApiData(req, res){
             console.log(weather_data_json);
             weatherData ={
                 temp: weather_data_json.data[0].temp,
-                weather: weather_data_json.data[0].weather.description,
-                maxTemp: weather_data_json.data[0].weather.max_temp,
-                minTemp: weather_data_json.data[0].weather.min_temp ,
-                precip: weather_data_json.data[0].weather.precip,
+                weather: weather_data_json.data[0].description,
+                maxTemp: weather_data_json.data[0].max_temp,
+                minTemp: weather_data_json.data[0].min_temp ,
+                precip: weather_data_json.data[0].precip,
             }}catch (error) {
             console.log("There has been an error fetching WeatherBit information ", error);
         }}
@@ -111,7 +111,7 @@ async function getApiData(req, res){
         try {
             const pix_data = await pix_response.json();
             console.log(pix_data);
-            pic_pic = await fetch(pix_data.hits[4].webformatURL);
+            pic_pic = pix_data.hits[0].webformatURL;
             foto = {
                 fotoCity: pic_pic,
             }}catch (error) {
@@ -135,8 +135,10 @@ async function getApiData(req, res){
     console.log(`After fetching the data: ${projectData}`);
 };
 
+
 app.get('/allData', (request, response)=>{
     response.send(projectData);
 })
+
 
 module.exports = app;
