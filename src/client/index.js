@@ -2,7 +2,6 @@
 
 import { getApiData } from "./js/app";
 import { updateUI } from "./js/app";
-
 import './styles/base.scss'
 
 export {getApiData}
@@ -21,12 +20,13 @@ function performAction (e){
     console.log(startDate);
     const endDate = document.getElementById('endDate').value;
     console.log(endDate);
+    e.preventDefault();
     getApiData('http://localhost:1111/allData', {
         Country: country,
         City: city,
         Start: startDate,
         End: endDate,
     })
-    .then (()=>{updateUI();});
+    .then(()=>{updateUI();});
 };
 
