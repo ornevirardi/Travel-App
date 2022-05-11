@@ -29,7 +29,7 @@ module.exports = {
         },
         plugins: [
             new HtmlWebPackPlugin({
-                template: "./src/client/view/index.html",
+                template: "./src/client/views/index.html",
                 filename: "./index.html",
             }),
             new MiniCssExtractPlugin({filename: "[name].css"})
