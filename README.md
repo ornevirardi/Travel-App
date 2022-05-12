@@ -22,6 +22,9 @@ After following this steps, a dist folder should be automatically created by web
 
 ![](img/console.jpg)
 
+Tests and ServiceWorkers compelted:
+![](img/SW+Test.jpg)
+
 The app should look like this:
 ![](img/app.jpg)
 
