@@ -16,14 +16,13 @@ $ npm i
 $ npm run build-prod
 
 $ npm start
+
+$ npm test
 ```
 
 After following this steps, a dist folder should be automatically created by webpack and the project will run in port 7654.
 
 ![](img/console.jpg)
-
-Tests and ServiceWorkers compelted:
-![](img/SW+Test.jpg)
 
 The app should look like this:
 ![](img/app.jpg)
