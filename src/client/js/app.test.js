@@ -1,11 +1,9 @@
-// Test taken from JEST documentation https://jestjs.io/docs/api#describeonlyname-fn
+//Test taken from Udacity question:  https://knowledge.udacity.com/questions/788539
 
-import { getApiData } from "./app.js";
+ import { updateUI } from './app';
 
-
-//Main Function
-describe('getApiData must be an Async function', () => {
-    test('Excellent! getApiData is an Async function!', async () => {
-        expect(typeof getApiData).toBe("function");
-    });
+describe ('The UI of the card', ()=> {
+    test("The function is defined", () => { // the test case
+        expect(updateUI).toBeDefined();
+});
 });
