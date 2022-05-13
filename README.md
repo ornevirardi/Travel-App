@@ -22,8 +22,6 @@ $ npm test
 
 After following this steps, a dist folder should be automatically created by webpack and the project will run in port 1111.
 
-![](img/console.jpg)
-
 The app should look like this:
 ![](img/app.jpg)
 
