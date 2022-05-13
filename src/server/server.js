@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+let projectData = {};
 // Require Express to run server and routes
 const express = require("express");
 // Start up an instance of app
@@ -20,19 +20,8 @@ const fetch = (...args) =>
 // Initialize the main project folder
 app.use(express.static("dist"));
 
-
-// Setup Server
-const port = 1111;
-const server = app.listen(port, listening);
-
-function listening() {
-  console.log("Yay! The server is running!");
-  console.log(`Running on localhost: ${port}`);
-}
-
-
 app.get('/', function (req, res) {
-    res.sendFile('dist/index.html')
+    res.status(200).res.sendFile('dist/index.html')
   }); 
   
 //Global Variables
